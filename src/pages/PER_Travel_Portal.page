@@ -1,0 +1,105 @@
+<apex:page controller="TravelController">
+    <apex:form >
+     <apex:tabPanel id="tabpanel" title="Travel Management" width="600px">
+            
+       
+                <!-- Tab1 --> 
+               <apex:tab id="searchPackages" label="Search Packages" title="SearchPackages"                    
+                    labelWidth="200px" name="searchPackages" >    
+                    <apex:pageMessages ></apex:pageMessages>
+                    <apex:pageBlock > 
+                                                 
+                      <br>  <b>Search Holiday Packages By </b> </br>
+                            <br></br>
+                       
+                      
+                           <span><b>City: </b></span> 
+                           <apex:selectList value="{!selectedCity}" multiselect="false" size="1" >
+                               <apex:selectOptions value="{!citiesLst}"/>
+                           </apex:selectList>
+                           
+                           <span><b>Cost: </b></span> 
+                           <apex:selectList value="{!selectedCost}" multiselect="false" size="1" >
+                               <apex:selectOptions value="{!costLst}"/>
+                           </apex:selectList>
+                            <span><b>Number of Days: </b></span> 
+                           <apex:selectList value="{!selectedDays}" multiselect="false" size="1" >
+                               <apex:selectOptions value="{!daysLst}"/>
+                           </apex:selectList>
+                           
+                            <apex:commandButton value="Search" action="{!fetchPackages}" />
+                          
+                         
+                         
+                        
+                        <br><b>Search Results </b> </br>
+                           <br></br>    
+                            <apex:outputPanel id="pkgs">
+                               <apex:pageBlockTable value="{!PkgWrapperList }" var="packgeList">
+                                 <apex:column >
+                                   <apex:facet name="header">
+                                    <apex:inputCheckbox />
+                                   </apex:facet>
+                                    <apex:inputCheckbox value="{!packgeList.isSelected}" id="InputId" />
+                                    </apex:column>                           
+                                   <apex:column headerValue="PackageName" ><apex:commandLink onclick="window.open('/apex/Holiday_Package_Details?id={!packgeList.pack.Name}','_blank','height=500,width=900,top=300,left=500');" value="{!packgeList.pack.Name}" /> </apex:column>
+                                   <apex:column value="{!packgeList.pack.Cost__c}"/>
+                                   <apex:column value="{!packgeList.pack.City__c}"/>
+                                   <apex:column value="{!packgeList.pack.No_of_Days__c}"/>
+                                </apex:pageBlockTable>                  
+                           
+                            </apex:outputPanel>                                                                      
+                        <apex:commandButton value="Send Enquiry" id="sendEnquiry" action="{!loadLeadForm}" /> 
+                       
+                       </apex:pageBlock>        
+                </apex:tab>
+                
+                <!-- Tab2 --> 
+                <apex:tab id="travelguide" label="Travel Guide" title="TravelGuide"                    
+                    labelWidth="200px" name="travelguide">
+                    
+                    <apex:pageBlock >
+                    <apex:pageBlockSection title="Click the links below to download useful travel information"></apex:pageBlockSection>
+                    <apex:pageBlockTable value="{!attachments}" var="att">
+                          <apex:column value="{!att.Name}" />
+                          <apex:column >
+                             <apex:outputLink value="https://c.ap2.content.force.com/servlet/servlet.FileDownload?file={!att.Id}"
+                                target="_blank">Download <span class="dload-icn"><img src="https://cdn1.iconfinder.com/data/icons/material-core/19/file-download-16.png"/></span></apex:outputLink>
+                          </apex:column>
+                      </apex:pageBlockTable>                      
+                    </apex:pageBlock>
+                </apex:tab>
+                
+                <!-- Tab3 -->              
+                <apex:tab id="contactus" label="Contact Us" title="Information"
+                    labelWidth="200px" name="contactus">
+                    
+                        <apex:pageBlock >
+                        
+                             <apex:pageBlockSection >
+                             
+                            <div class="contact">
+                                Fayaz Tours  and Travels,<br/>                               
+                                Mehdipatnam,<br />                     
+                                Hyderabad,<br />
+                                 TS 518007
+                              </div>
+                              
+                            </apex:pageBlockSection>
+                            
+                            
+                        </apex:pageBlock>
+                        
+                    
+                    
+                </apex:tab>
+               
+                
+                
+            
+                  
+                
+                   
+           </apex:tabPanel>
+</apex:form> 
+   </apex:page>

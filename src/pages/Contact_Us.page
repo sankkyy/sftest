@@ -1,0 +1,12 @@
+<apex:page >
+   <apex:form >
+      <apex:pageBlock >
+          <apex:pageBlockSection >
+                   Fayaz sss123 Travelling Portal ,<br/>
+                   Near St Anns college,<br />
+                    Mehdipatnam,<br />
+                   Hyderabad.5567667eGGFFDSG
+           </apex:pageBlockSection>
+        </apex:pageBlock>
+     </apex:form> 
+</apex:page>

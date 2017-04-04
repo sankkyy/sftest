@@ -1,0 +1,6 @@
+Hi,
+
+A New Package with {!Package__c.Name} has been created waiting approval please do the needful.
+
+Regards,
+{!User.Name}

@@ -1,0 +1,105 @@
+<apex:page controller="PackageInfo" showHeader="false" sidebar="false">
+  <apex:form >
+   <div id="info">
+     <p>
+     <h3>Details of {!PackageInfo.Name}</h3>
+     <ul>         
+     <li><b>City : {!PackageInfo.City__c}</b></li>
+     <li><b>No Of Days : {!PackageInfo.No_Of_Days__c}</b></li>
+     <li><b>Cost : {!PackageInfo.Cost__c}</b></li>     
+     <li><b>Package Includes </b></li>
+     <li><b>Stay in 3 star hotels</b></li>
+     <li><b>Sightseeing and tours</b></li> 
+     <li><b>Tour guide</b></li>
+     <li><b>Airport transfer</b></li> 
+     </ul>
+       
+     </p>
+        
+     </div>
+     
+      <div id="map"></div>
+   <div id="btn">
+   <apex:commandButton value="close" onclick="window.top.close()" style="border: 1px solid #330000;margin-left:70%;
+                                padding: 10px 20px;background: #D9ECFE;width: 100px;border-radius: 30px;"/>
+   </div>
+  
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var myOptions={ zoom: 8,mapTypeId: google.maps.MapTypeId.ROADMAP,mapTypeControl: false };
+            var map;
+            var marker;
+            var geocoder = new google.maps.Geocoder();
+            var address ="{!PackageInfo.City__c}";
+            var infowindow = new google.maps.InfoWindow({
+                content: address 
+            });
+            
+            geocoder.geocode( { address: address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK&&results.length) {
+                    if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+                        
+                        //create map
+                        map = new google.maps.Map(document.getElementById("map"), myOptions);
+                        
+                        //center map
+                        map.setCenter(results[0].geometry.location);
+                        
+                        //create marker
+                        marker = new google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: map,
+                            title: address 
+                        });
+                        
+                        //add listeners
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.open(map,marker);
+                        });
+                        google.maps.event.addListener(infowindow, 'closeclick', function() {
+                            map.setCenter(marker.getPosition());
+                        });
+                    }
+                } else {
+                    $('#map').css({'height' : '15px'});
+                    $('#map').html("Oops! address 's city could not be found, please make sure the city is correct.");
+                   
+                }
+            });
+                       
+        });
+        </script>
+        <style>
+            #map {
+            font-family: Times New Roman ;
+            font-size:12px;
+            line-height:normal !important;
+            height:300px;
+            width:500px;
+            background:transparent;
+            position: absolute;
+            top:50px;
+            left:250px;
+            padding-left: 10px;
+            right:0
+            }
+           #info{
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            
+             }
+           
+            #btn{
+                position: absolute;
+                left: 600px;
+                top: 350px;
+                }
+
+            
+        </style>
+
+  </apex:form>
+</apex:page>

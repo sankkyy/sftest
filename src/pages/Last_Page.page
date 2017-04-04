@@ -1,0 +1,7 @@
+<apex:page >
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>Thanks For your Enquiry Will get back to you Soon</h1>
+  <br></br>
+  <apex:outputLink value="apex/PER_Travel_Portal" id="theLink">home</apex:outputLink>
+  
+</apex:page>

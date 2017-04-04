@@ -1,0 +1,32 @@
+<apex:page controller="TravelController">
+
+                  <apex:pageBlock >
+                       <br><b><u>Im Interested in the Following Packages</u></b> </br> 
+                        <apex:pageBlockTable value="{!checkedPackages }" var="packge">
+                            
+                            
+                            <apex:column value="{!packge.Name}"/>
+                            
+                        </apex:pageBlockTable>
+
+                  </apex:pageBlock>
+
+                  <apex:pageBlock > 
+                   
+                     <apex:pageMessages id="showmsg"></apex:pageMessages>
+                       <apex:form >
+                        <apex:panelGrid columns="3">
+                            <apex:outputLabel style="font-weight:bold;" value="First Name  "/> : <apex:inputText value="{!firstName}"/>
+                            <apex:outputLabel style="font-weight:bold;" value="Last Name "/> : <apex:inputText value="{!lastName}"/>
+                            <apex:outputLabel style="font-weight:bold;" value="Company     "/>  :    <apex:inputText value="{!company}"/>
+                            <apex:outputLabel style="font-weight:bold;" value="Email      "/>   :     <apex:inputText value="{!email}"/>
+                            <apex:outputLabel style="font-weight:bold;" value="Phone       "/>  :     <apex:inputText value="{!phone}"/>         
+           
+                            <apex:commandButton value="Submit"  action="{!submitForm}" style="width:90px" rerender="showmsg"/><apex:outputLabel value=""/>
+                            <apex:commandButton value="Close" action="{!back}" style="width:90px"/>
+                        </apex:panelGrid>
+                              
+                       </apex:form> 
+                                          
+                    </apex:pageBlock>
+</apex:page>
