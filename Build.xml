@@ -303,7 +303,7 @@
 						serverUrl="${serverUrl}"
 						queryResult="buildDetails"
 						query="SELECT Id, RevisionStart__c,RevisionEnd__c FROM BuildDetails__c  order by CreatedDate DESC LIMIT 1"/>
-
+					<echo>${line.separator} *** after query </echo>	
 					<!-- Parse JSON result via JavaScript eval -->
 					
 					<script language="javascript">
@@ -314,7 +314,7 @@
 							project.setProperty('is.lastcommit.id.not.found', true);
 						}
 					</script>
-						
+				<echo>${line.separator} *** script after </echo>			
 				</then>
 				<else>
 					<echo>${line.separator} *** Full deployment started... </echo>
