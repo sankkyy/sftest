@@ -1,9 +1,9 @@
 public without sharing class Lead{
-    
+    //Sanket
     public Lead(){
         
     }
-    public Lead(String firstName,String lastName,String company,String email,String phone){
+    public Lead(String firstName,String lastName,String company,String email,String phone
         this.firstName=firstName;
         this.lastName=lastName;
         this.company=company;
